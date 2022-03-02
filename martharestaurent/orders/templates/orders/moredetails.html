@@ -1,0 +1,43 @@
+{% extends "orders/base.html" %}
+
+{% block content %}
+
+    <div class="row row-cols-1">
+        <div class="col col-sm-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Today revenue</h5>
+                    <hr class="mt-3">
+                    <h2 class="text-muted">Rs. {{ income }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Most famous main dish</h5>
+                    <hr class="mt-3">
+                    <h2 class="text-muted">{{ famousMaindish }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">Most famous side dish</h5>
+                    <hr class="mt-3">
+                    <h2 class="text-muted">{{ famousSidedish }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title"></h5>
+                    <hr class="mt-3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
