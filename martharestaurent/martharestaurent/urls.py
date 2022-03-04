@@ -16,8 +16,10 @@ Including another URLconf
 # from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path, include
+from orders.views import order_form
 
 urlpatterns = [
+    path('', order_form),
     path('admin/', admin.site.urls),
     path('orders/', include('orders.urls'))
 ]
