@@ -6,6 +6,7 @@ from .models import Maindishes
 from .models import Sidedishes
 from .models import Desserts
 from .models import revenue
+from django.db.models import Count
 
 # Create your views here.
 def order_form(request):
@@ -61,13 +62,17 @@ def more_info(request):
     for i in allincome:
         totalIncome += i.amount
         
-    resultOne = Maindishes.objects.latest('foodname')
-    famousmain = getattr(resultOne, 'foodname').capitalize()
-    print('======================================================================')
-    # print(field_value)
+    resultOne = Maindishes.objects.values('foodname').order_by('-foodname__count').annotate(Count('foodname')).first()
+    famousmain = resultOne['foodname'].capitalize()
+    print(resultOne['foodname'])
     
-    resultTwo = Sidedishes.objects.latest('foodname')
-    famousside = getattr(resultTwo, 'foodname').capitalize()
+    resultTwo = Sidedishes.objects.values('foodname').order_by('-foodname__count').annotate(Count('foodname')).first()
+    if resultTwo['foodname'] == 'dhal_curry':
+        famousside = 'Dhal Curry'
+    elif resultTwo['foodname'] == 'fish_curry':
+        famousside = 'Fish Curry'
+    else:
+        famousside = 'Wadai'
         
     context = {'income': totalIncome, 'famousMaindish':famousmain, 'famousSidedish': famousside}
     return render(request, 'orders/moredetails.html', context)
